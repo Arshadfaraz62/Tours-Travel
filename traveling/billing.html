@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Billing Book</title>
+  <link rel="stylesheet" href="billing.css">
+</head>
+<body>
+  <main class="bill-page">
+    <header class="bill-header">
+      <h1 contenteditable="true">Your Company Name</h1>
+      <div class="header-contacts">
+        <label>
+          Phone 1
+          <input type="tel" name="phone1" placeholder="+91 98765 43210" required>
+        </label>
+        <label>
+          Phone 2
+          <input type="tel" name="phone2" placeholder="+91 91234 56789" required>
+        </label>
+      </div>
+    </header>
+
+    <section class="bill-details">
+      <label>
+        Bill Number
+        <input type="text" name="billNumber" placeholder="BILL-001" required>
+      </label>
+      <label>
+        Date
+        <input type="date" name="billDate" required>
+      </label>
+      <label>
+        Customer Name
+        <input type="text" name="customerName" placeholder="Enter customer name" required>
+      </label>
+    </section>
+
+    <section class="items-section">
+      <table>
+        <thead>
+          <tr>
+            <th>Color Number</th>
+            <th>Item Name</th>
+            <th>Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="text" placeholder="e.g. C-101" required></td>
+            <td><input type="text" placeholder="Enter item" required></td>
+            <td><input type="number" min="1" placeholder="0" required></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="e.g. C-102"></td>
+            <td><input type="text" placeholder="Enter item"></td>
+            <td><input type="number" min="1" placeholder="0"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="e.g. C-103"></td>
+            <td><input type="text" placeholder="Enter item"></td>
+            <td><input type="number" min="1" placeholder="0"></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="e.g. C-104"></td>
+            <td><input type="text" placeholder="Enter item"></td>
+            <td><input type="number" min="1" placeholder="0"></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="payment-section">
+      <h2>Payment Method</h2>
+      <div class="payment-options">
+        <label>
+          <input type="radio" name="paymentMethod" value="cash" checked>
+          Cash
+        </label>
+        <label>
+          <input type="radio" name="paymentMethod" value="online">
+          Online
+        </label>
+      </div>
+
+      <div class="payment-slip" id="paymentSlipGroup" hidden>
+        <label for="paymentSlip">Upload Payment Slip (Required for online payment)</label>
+        <input type="file" id="paymentSlip" name="paymentSlip" accept="image/*,.pdf">
+      </div>
+    </section>
+
+    <section class="signature-section">
+      <p>Customer Signature</p>
+      <div class="signature-box" contenteditable="true" aria-label="signature area"></div>
+    </section>
+
+    <button type="button" class="print-btn" onclick="window.print()">Print Billing Book</button>
+  </main>
+
+  <script src="billing.js"></script>
+</body>
+</html>
