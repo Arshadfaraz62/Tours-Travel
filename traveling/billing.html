@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Billing Book</title>
+  <link rel="stylesheet" href="billing.css">
+</head>
+<body>
+  <main class="bill-book">
+    <header class="bill-header">
+      <div>
+        <h1 contenteditable="true">Your Company Name</h1>
+        <p>Billing Book</p>
+      </div>
+      <div class="contact-box">
+        <label>Phone 1 <input type="tel" placeholder="Enter first phone number"></label>
+        <label>Phone 2 <input type="tel" placeholder="Enter second phone number"></label>
+      </div>
+    </header>
+
+    <section class="customer-section">
+      <label>Customer Name <input type="text" placeholder="Customer full name"></label>
+      <label>Billing Date <input type="date"></label>
+      <label>Address <input type="text" placeholder="Address"></label>
+    </section>
+
+    <section>
+      <table>
+        <thead>
+          <tr>
+            <th>Colour / No.</th>
+            <th>Item Name</th>
+            <th>Quantity</th>
+            <th>Payment Method</th>
+            <th>Payment Slip</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="text" placeholder="Red / 01"></td>
+            <td><input type="text" placeholder="Item name"></td>
+            <td><input type="number" min="1" placeholder="0"></td>
+            <td>
+              <select class="payment-method">
+                <option value="cash">Cash</option>
+                <option value="online">Online</option>
+              </select>
+            </td>
+            <td>
+              <input type="file" class="payment-slip" accept="image/*,.pdf" disabled>
+              <small class="hint">Required only for online payment</small>
+            </td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="Blue / 02"></td>
+            <td><input type="text" placeholder="Item name"></td>
+            <td><input type="number" min="1" placeholder="0"></td>
+            <td>
+              <select class="payment-method">
+                <option value="cash">Cash</option>
+                <option value="online">Online</option>
+              </select>
+            </td>
+            <td>
+              <input type="file" class="payment-slip" accept="image/*,.pdf" disabled>
+              <small class="hint">Required only for online payment</small>
+            </td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="Green / 03"></td>
+            <td><input type="text" placeholder="Item name"></td>
+            <td><input type="number" min="1" placeholder="0"></td>
+            <td>
+              <select class="payment-method">
+                <option value="cash">Cash</option>
+                <option value="online">Online</option>
+              </select>
+            </td>
+            <td>
+              <input type="file" class="payment-slip" accept="image/*,.pdf" disabled>
+              <small class="hint">Required only for online payment</small>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="signature-section">
+      <div>
+        <h2>Customer Signature</h2>
+        <canvas id="signature-pad" width="420" height="160" aria-label="Signature area"></canvas>
+        <div class="signature-actions">
+          <button type="button" id="clear-signature">Clear Signature</button>
+        </div>
+      </div>
+      <div class="notes">
+        <label>Notes
+          <textarea rows="8" placeholder="Write payment details or delivery notes..."></textarea>
+        </label>
+      </div>
+    </section>
+  </main>
+
+  <script src="billing.js"></script>
+</body>
+</html>
