@@ -1,21 +1,38 @@
-const paymentMethods = document.querySelectorAll('.payment-method');
+const { cloneTemplate, getRequiredElement, renderCollection } = window.DomUtils;
 
-paymentMethods.forEach((methodSelect) => {
-  methodSelect.addEventListener('change', () => {
-    const row = methodSelect.closest('tr');
-    const slipInput = row.querySelector('.payment-slip');
-    const isOnline = methodSelect.value === 'online';
+const billingItems = ['Red / 01', 'Blue / 02', 'Green / 03'];
+const billingItemsTable = getRequiredElement('#billing-items');
 
-    slipInput.disabled = !isOnline;
-    slipInput.required = isOnline;
+const createBillingRow = (colourPlaceholder) => {
+  const row = cloneTemplate('#billing-row-template');
 
-    if (!isOnline) {
-      slipInput.value = '';
-    }
-  });
+  getRequiredElement('input[type="text"]', row).placeholder = colourPlaceholder;
+
+  return row;
+};
+
+const updatePaymentSlip = (methodSelect) => {
+  const row = methodSelect.closest('tr');
+  const slipInput = getRequiredElement('.payment-slip', row);
+  const isOnline = methodSelect.value === 'online';
+
+  slipInput.disabled = !isOnline;
+  slipInput.required = isOnline;
+
+  if (!isOnline) {
+    slipInput.value = '';
+  }
+};
+
+renderCollection(billingItemsTable, billingItems, createBillingRow);
+
+billingItemsTable.addEventListener('change', (event) => {
+  if (event.target.matches('.payment-method')) {
+    updatePaymentSlip(event.target);
+  }
 });
 
-const canvas = document.getElementById('signature-pad');
+const canvas = getRequiredElement('#signature-pad');
 const ctx = canvas.getContext('2d');
 let drawing = false;
 
@@ -64,6 +81,6 @@ canvas.addEventListener('touchstart', startDraw, { passive: false });
 canvas.addEventListener('touchmove', draw, { passive: false });
 canvas.addEventListener('touchend', stopDraw);
 
-document.getElementById('clear-signature').addEventListener('click', () => {
+getRequiredElement('#clear-signature').addEventListener('click', () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 });

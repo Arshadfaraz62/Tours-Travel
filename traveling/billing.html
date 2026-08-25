@@ -36,53 +36,7 @@
             <th>Payment Slip</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td><input type="text" placeholder="Red / 01"></td>
-            <td><input type="text" placeholder="Item name"></td>
-            <td><input type="number" min="1" placeholder="0"></td>
-            <td>
-              <select class="payment-method">
-                <option value="cash">Cash</option>
-                <option value="online">Online</option>
-              </select>
-            </td>
-            <td>
-              <input type="file" class="payment-slip" accept="image/*,.pdf" disabled>
-              <small class="hint">Required only for online payment</small>
-            </td>
-          </tr>
-          <tr>
-            <td><input type="text" placeholder="Blue / 02"></td>
-            <td><input type="text" placeholder="Item name"></td>
-            <td><input type="number" min="1" placeholder="0"></td>
-            <td>
-              <select class="payment-method">
-                <option value="cash">Cash</option>
-                <option value="online">Online</option>
-              </select>
-            </td>
-            <td>
-              <input type="file" class="payment-slip" accept="image/*,.pdf" disabled>
-              <small class="hint">Required only for online payment</small>
-            </td>
-          </tr>
-          <tr>
-            <td><input type="text" placeholder="Green / 03"></td>
-            <td><input type="text" placeholder="Item name"></td>
-            <td><input type="number" min="1" placeholder="0"></td>
-            <td>
-              <select class="payment-method">
-                <option value="cash">Cash</option>
-                <option value="online">Online</option>
-              </select>
-            </td>
-            <td>
-              <input type="file" class="payment-slip" accept="image/*,.pdf" disabled>
-              <small class="hint">Required only for online payment</small>
-            </td>
-          </tr>
-        </tbody>
+        <tbody id="billing-items"></tbody>
       </table>
     </section>
 
@@ -102,6 +56,25 @@
     </section>
   </main>
 
+  <template id="billing-row-template">
+    <tr>
+      <td><input type="text"></td>
+      <td><input type="text" placeholder="Item name"></td>
+      <td><input type="number" min="1" placeholder="0"></td>
+      <td>
+        <select class="payment-method">
+          <option value="cash">Cash</option>
+          <option value="online">Online</option>
+        </select>
+      </td>
+      <td>
+        <input type="file" class="payment-slip" accept="image/*,.pdf" disabled>
+        <small class="hint">Required only for online payment</small>
+      </td>
+    </tr>
+  </template>
+
+  <script src="dom-utils.js"></script>
   <script src="billing.js"></script>
 </body>
 </html>
