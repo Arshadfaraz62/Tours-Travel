@@ -1,4 +1,6 @@
 const errorBanner = document.getElementById('billing-error');
+const ALLOWED_SLIP_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'application/pdf'];
+const MAX_SLIP_BYTES = 5 * 1024 * 1024;
 
 const reportError = (message, error) => {
   if (error) {
@@ -53,6 +55,32 @@ paymentMethods.forEach((methodSelect) => {
       if (!isOnline) {
         slipInput.value = '';
       }
+    }),
+  );
+});
+
+document.querySelectorAll('.payment-slip').forEach((slipInput) => {
+  slipInput.addEventListener(
+    'change',
+    guard('Could not check the selected payment slip.', () => {
+      const file = slipInput.files[0];
+
+      if (!file) {
+        slipInput.setCustomValidity('');
+        return;
+      }
+
+      if (!ALLOWED_SLIP_TYPES.includes(file.type)) {
+        slipInput.value = '';
+        slipInput.setCustomValidity('Only JPEG, PNG, WebP or PDF slips are allowed.');
+      } else if (file.size > MAX_SLIP_BYTES) {
+        slipInput.value = '';
+        slipInput.setCustomValidity('Payment slip must be 5 MB or smaller.');
+      } else {
+        slipInput.setCustomValidity('');
+      }
+
+      slipInput.reportValidity();
     }),
   );
 });

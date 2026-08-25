@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self'; style-src 'self'; script-src 'self'; form-action 'self'; base-uri 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Billing Book</title>
   <link rel="stylesheet" href="billing.css">
 </head>
@@ -15,15 +17,15 @@
         <p>Billing Book</p>
       </div>
       <div class="contact-box">
-        <label>Phone 1 <input type="tel" placeholder="Enter first phone number"></label>
-        <label>Phone 2 <input type="tel" placeholder="Enter second phone number"></label>
+        <label>Phone 1 <input type="tel" placeholder="Enter first phone number" pattern="[0-9+()\- ]{7,20}" maxlength="20"></label>
+        <label>Phone 2 <input type="tel" placeholder="Enter second phone number" pattern="[0-9+()\- ]{7,20}" maxlength="20"></label>
       </div>
     </header>
 
     <section class="customer-section">
-      <label>Customer Name <input type="text" placeholder="Customer full name"></label>
+      <label>Customer Name <input type="text" placeholder="Customer full name" maxlength="100"></label>
       <label>Billing Date <input type="date"></label>
-      <label>Address <input type="text" placeholder="Address"></label>
+      <label>Address <input type="text" placeholder="Address" maxlength="200"></label>
     </section>
 
     <section>
@@ -39,9 +41,9 @@
         </thead>
         <tbody>
           <tr>
-            <td><input type="text" placeholder="Red / 01"></td>
-            <td><input type="text" placeholder="Item name"></td>
-            <td><input type="number" min="1" placeholder="0"></td>
+            <td><input type="text" placeholder="Red / 01" maxlength="30"></td>
+            <td><input type="text" placeholder="Item name" maxlength="100"></td>
+            <td><input type="number" min="1" max="9999" step="1" placeholder="0"></td>
             <td>
               <select class="payment-method">
                 <option value="cash">Cash</option>
@@ -49,14 +51,14 @@
               </select>
             </td>
             <td>
-              <input type="file" class="payment-slip" accept="image/*,.pdf" disabled>
+              <input type="file" class="payment-slip" accept="image/jpeg,image/png,image/webp,application/pdf" disabled>
               <small class="hint">Required only for online payment</small>
             </td>
           </tr>
           <tr>
-            <td><input type="text" placeholder="Blue / 02"></td>
-            <td><input type="text" placeholder="Item name"></td>
-            <td><input type="number" min="1" placeholder="0"></td>
+            <td><input type="text" placeholder="Blue / 02" maxlength="30"></td>
+            <td><input type="text" placeholder="Item name" maxlength="100"></td>
+            <td><input type="number" min="1" max="9999" step="1" placeholder="0"></td>
             <td>
               <select class="payment-method">
                 <option value="cash">Cash</option>
@@ -64,14 +66,14 @@
               </select>
             </td>
             <td>
-              <input type="file" class="payment-slip" accept="image/*,.pdf" disabled>
+              <input type="file" class="payment-slip" accept="image/jpeg,image/png,image/webp,application/pdf" disabled>
               <small class="hint">Required only for online payment</small>
             </td>
           </tr>
           <tr>
-            <td><input type="text" placeholder="Green / 03"></td>
-            <td><input type="text" placeholder="Item name"></td>
-            <td><input type="number" min="1" placeholder="0"></td>
+            <td><input type="text" placeholder="Green / 03" maxlength="30"></td>
+            <td><input type="text" placeholder="Item name" maxlength="100"></td>
+            <td><input type="number" min="1" max="9999" step="1" placeholder="0"></td>
             <td>
               <select class="payment-method">
                 <option value="cash">Cash</option>
@@ -79,7 +81,7 @@
               </select>
             </td>
             <td>
-              <input type="file" class="payment-slip" accept="image/*,.pdf" disabled>
+              <input type="file" class="payment-slip" accept="image/jpeg,image/png,image/webp,application/pdf" disabled>
               <small class="hint">Required only for online payment</small>
             </td>
           </tr>
@@ -97,7 +99,7 @@
       </div>
       <div class="notes">
         <label>Notes
-          <textarea rows="8" placeholder="Write payment details or delivery notes..."></textarea>
+          <textarea rows="8" maxlength="2000" placeholder="Write payment details or delivery notes..."></textarea>
         </label>
       </div>
     </section>

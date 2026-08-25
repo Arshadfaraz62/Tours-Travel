@@ -137,6 +137,10 @@ body{
 {
  border-top-color: blue;
 }
+.gender-label
+{
+    margin-right: 30px;
+}
 .check
 {
     margin-right: 30px;
