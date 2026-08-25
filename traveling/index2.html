@@ -4,51 +4,54 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self'; style-src 'self' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com; script-src 'self'; form-action 'self'; base-uri 'none'">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <title>registration form</title>
     <link rel="stylesheet" href="style2.css">
     <!-- Add icon library -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
     <div class="container">
       <h2>Registration form</h2>
       <div class="form-container">
-        <form>
+        <form id="registration-form" method="post" action="/register" autocomplete="off">
             <div class="input-name">
                 <i class="fa fa-user"></i> 
-                <input type="text" placeholder="first name" class="name">
+                <input type="text" name="first_name" placeholder="first name" class="name" maxlength="50" autocomplete="given-name" required>
                 <span>
                     <i class="fa fa-user"></i> 
-                    <input type="text" placeholder="last name" class="name"> 
+                    <input type="text" name="last_name" placeholder="last name" class="name" maxlength="50" autocomplete="family-name" required> 
                 </span>
             </div>
 
             <div class="input-name">
                 <i class="fa fa-envelope"></i> 
-                <input type="email" placeholder="Email" class="text-name">
+                <input type="email" name="email" placeholder="Email" class="text-name" maxlength="254" autocomplete="email" required>
             </div>
 
             
             <div class="input-name">
                 <i class="fa fa-lock"></i> 
-                <input type="password"  placeholder="Password" class="name" >
+                <input type="password" id="password" name="password" placeholder="Password" class="name" minlength="12" maxlength="128" autocomplete="new-password" required>
             </div>
 
             
             <div class="input-name">
                 <i class="fa fa-lock"></i> 
-                <input type="password" placeholder="Confrom password" class="name">
+                <input type="password" id="confirm-password" name="confirm_password" placeholder="Confrom password" class="name" minlength="12" maxlength="128" autocomplete="new-password" required>
             </div>
 
             
             <div class="input-name">
-                <input type="radio" class="radio" name="op">
-                <label style="margin-right: 30px;">male</label>
-                <input type="radio" class="radio" name="op">
+                <input type="radio" class="radio" name="op" value="male">
+                <label class="gender-label">male</label>
+                <input type="radio" class="radio" name="op" value="female">
                 <label>female</label>
             </div>
             <div class="input-name">
-                <select class="country">
+                <select class="country" name="country" required>
                     <option>select a country</option>
                     <option>india</option>
                     <option>pakistan</option>
@@ -58,8 +61,8 @@
                 <div class="arrow"></div>
             </div>
             <div class="input-name">
-                <input type="checkbox" id="cb" class="checkbox">
-                <labels for="cb" class="check">  i accept all the terms and condition</labels>
+                <input type="checkbox" id="cb" name="terms" class="checkbox" required>
+                <label for="cb" class="check">  i accept all the terms and condition</label>
             </div>
             <div class="input-name">
                 <input type="submit" class="submit-button" value="Register">
@@ -68,5 +71,6 @@
         </form>
       </div>
     </div>
+    <script src="register.js"></script>
 </body>
 </html>

@@ -1,4 +1,30 @@
 const paymentMethods = document.querySelectorAll('.payment-method');
+const paymentSlips = document.querySelectorAll('.payment-slip');
+const ALLOWED_SLIP_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'application/pdf'];
+const MAX_SLIP_BYTES = 5 * 1024 * 1024;
+
+paymentSlips.forEach((slipInput) => {
+  slipInput.addEventListener('change', () => {
+    const file = slipInput.files[0];
+
+    if (!file) {
+      slipInput.setCustomValidity('');
+      return;
+    }
+
+    if (!ALLOWED_SLIP_TYPES.includes(file.type)) {
+      slipInput.value = '';
+      slipInput.setCustomValidity('Only JPEG, PNG, WebP or PDF slips are allowed.');
+    } else if (file.size > MAX_SLIP_BYTES) {
+      slipInput.value = '';
+      slipInput.setCustomValidity('Payment slip must be 5 MB or smaller.');
+    } else {
+      slipInput.setCustomValidity('');
+    }
+
+    slipInput.reportValidity();
+  });
+});
 
 paymentMethods.forEach((methodSelect) => {
   methodSelect.addEventListener('change', () => {

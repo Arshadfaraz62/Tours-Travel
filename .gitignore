@@ -1,0 +1,15 @@
+# Personal documents and scans must never be committed
+*.pdf
+*.zip
+*.7z
+*.rar
+
+# Environment and credential files
+.env
+.env.*
+*.pem
+*.key
+*.p12
+credentials.json
+
+node_modules/
