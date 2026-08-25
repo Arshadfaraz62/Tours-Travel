@@ -23,39 +23,65 @@ const guard = (message, handler) => (event) => {
   }
 };
 
-const paymentMethods = document.querySelectorAll('.payment-method');
+const setUpBillingItems = () => {
+  if (!window.DomUtils) {
+    reportError('Billing rows could not be loaded because the page utilities are missing.');
+    return;
+  }
 
-if (paymentMethods.length === 0) {
-  reportError('No payment method selectors were found, so payment slip rules are inactive.');
-}
+  const { cloneTemplate, getRequiredElement, renderCollection } = window.DomUtils;
+  const billingItems = ['Red / 01', 'Blue / 02', 'Green / 03'];
+  const billingItemsTable = document.getElementById('billing-items');
 
-paymentMethods.forEach((methodSelect) => {
-  methodSelect.addEventListener(
+  if (!billingItemsTable) {
+    reportError('Billing items table is missing, so items cannot be entered.');
+    return;
+  }
+
+  const createBillingRow = (colourPlaceholder) => {
+    const row = cloneTemplate('#billing-row-template');
+
+    getRequiredElement('input[type="text"]', row).placeholder = colourPlaceholder;
+
+    return row;
+  };
+
+  const updatePaymentSlip = (methodSelect) => {
+    const row = methodSelect.closest('tr');
+
+    if (!row) {
+      throw new Error('Payment method selector is not inside a table row.');
+    }
+
+    const slipInput = getRequiredElement('.payment-slip', row);
+    const isOnline = methodSelect.value === 'online';
+
+    slipInput.disabled = !isOnline;
+    slipInput.required = isOnline;
+
+    if (!isOnline) {
+      slipInput.value = '';
+    }
+  };
+
+  try {
+    renderCollection(billingItemsTable, billingItems, createBillingRow);
+  } catch (error) {
+    reportError('Billing rows could not be loaded.', error);
+    return;
+  }
+
+  billingItemsTable.addEventListener(
     'change',
-    guard('Could not apply the payment slip rule for this row.', () => {
-      const row = methodSelect.closest('tr');
+    guard('Could not apply the payment slip rule for this row.', (event) => {
+      const methodSelect = event.target;
 
-      if (!row) {
-        throw new Error('Payment method selector is not inside a table row.');
-      }
-
-      const slipInput = row.querySelector('.payment-slip');
-
-      if (!slipInput) {
-        throw new Error('Row has no payment slip input.');
-      }
-
-      const isOnline = methodSelect.value === 'online';
-
-      slipInput.disabled = !isOnline;
-      slipInput.required = isOnline;
-
-      if (!isOnline) {
-        slipInput.value = '';
+      if (methodSelect instanceof Element && methodSelect.matches('.payment-method')) {
+        updatePaymentSlip(methodSelect);
       }
     }),
   );
-});
+};
 
 const setUpSignaturePad = () => {
   const canvas = document.getElementById('signature-pad');
@@ -140,6 +166,7 @@ const setUpSignaturePad = () => {
   );
 };
 
+setUpBillingItems();
 setUpSignaturePad();
 
 window.addEventListener('error', (event) => {
