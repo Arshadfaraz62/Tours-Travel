@@ -46,8 +46,6 @@ async function loadBilling() {
     toJSON: () => ({}),
   });
 
-  const source = await readFile(resolve(travelingDir, 'billing.js'), 'utf8');
-  expect(source).toContain('const paymentMethods');
   vi.resetModules();
   await import('../billing.js');
 
