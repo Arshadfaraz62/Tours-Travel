@@ -16,19 +16,20 @@
     <div class="container">
       <h2>Registration form</h2>
       <div class="form-container">
+        <p class="error-banner" id="registration-error" role="alert" hidden></p>
         <form id="registration-form" method="post" action="/register" autocomplete="off">
             <div class="input-name">
                 <i class="fa fa-user"></i> 
-                <input type="text" name="first_name" placeholder="first name" class="name" maxlength="50" autocomplete="given-name" required>
+                <input type="text" id="first-name" name="first_name" placeholder="first name" class="name" maxlength="50" autocomplete="given-name" required>
                 <span>
                     <i class="fa fa-user"></i> 
-                    <input type="text" name="last_name" placeholder="last name" class="name" maxlength="50" autocomplete="family-name" required> 
+                    <input type="text" id="last-name" name="last_name" placeholder="last name" class="name" maxlength="50" autocomplete="family-name" required> 
                 </span>
             </div>
 
             <div class="input-name">
                 <i class="fa fa-envelope"></i> 
-                <input type="email" name="email" placeholder="Email" class="text-name" maxlength="254" autocomplete="email" required>
+                <input type="email" id="email" name="email" placeholder="Email" class="text-name" maxlength="254" autocomplete="email" required>
             </div>
 
             
@@ -71,6 +72,6 @@
         </form>
       </div>
     </div>
-    <script src="register.js"></script>
+    <script src="index2.js"></script>
 </body>
 </html>
